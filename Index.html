@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Krishna N | Aerospace & Avionics Portfolio</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=DM+Sans:wght@300;400;500;700&display=swap');
+
+:root{
+    --bg:#060816;
+    --card:#0d1225;
+    --glass:rgba(255,255,255,0.06);
+    --border:rgba(255,255,255,0.08);
+    --text:#f4f7ff;
+    --muted:#b7bfd8;
+
+    --indigo:#7c5cff;
+    --pink:#ff4fd8;
+    --cyan:#36e4ff;
+    --amber:#ffbe3d;
+
+    --shadow:0 10px 40px rgba(0,0,0,0.35);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'DM Sans',sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    overflow-x:hidden;
+    cursor:none;
+}
+
+/* Scrollbar */
+
+::-webkit-scrollbar{
+    width:10px;
+}
+
+::-webkit-scrollbar-track{
+    background:#050814;
+}
+
+::-webkit-scrollbar-thumb{
+    background:linear-gradient(var(--indigo),var(--pink));
+    border-radius:20px;
+}
+
+/* Noise Overlay */
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background-image:
+    radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size:4px 4px;
+    mix-blend-mode:soft-light;
+    opacity:0.25;
+    pointer-events:none;
+    z-index:999;
+}
+
+/* Particle Canvas */
+
+#particles{
+    position:fixed;
+    inset:0;
+    z-index:-2;
+}
+
+/* Cursor */
+
+.cursor{
+    width:14px;
+    height:14px;
+    background:var(--cyan);
+    border-radius:50%;
+    position:fixed;
+    pointer-events:none;
+    transform:translate(-50%,-50%);
+    z-index:99999;
+    mix-blend-mode:screen;
+    box-shadow:0 0 18px var(--cyan);
+}
+
+.cursor-ring{
+    width:42px;
+    height:42px;
+    border:1px solid rgba(255,255,255,0.35);
+    border-radius:50%;
+    position:fixed;
+    pointer-events:none;
+    transform:translate(-50%,-50%);
+    z-index:99998;
+    transition:0.08s ease-out;
+}
+
+/* Loading Screen */
+
+.loader{
+    position:fixed;
+    inset:0;
+    background:#040611;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    z-index:100000;
+    transition:1s ease;
+}
+
+.loader.hide{
+    opacity:0;
+    visibility:hidden;
+}
+
+.loader h1{
+    font-family:'Syne',sans-serif;
+    font-size:5rem;
+    letter-spacing:8px;
+    background:linear-gradient(90deg,var(--cyan),var(--pink),var(--amber));
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    margin-bottom:20px;
+}
+
+.loadbar{
+    width:220px;
+    height:6px;
+    border-radius:20px;
+    background:rgba(255,255,255,0.08);
+    overflow:hidden;
+}
+
+.loadbar span{
+    display:block;
+    height:100%;
+    width:0;
+    background:linear-gradient(90deg,var(--indigo),var(--pink),var(--cyan));
+    animation:load 2s forwards;
+}
+
+@keyframes load{
+    to{width:100%;}
+}
+
+/* Navbar */
+
+nav{
+    position:fixed;
+    top:14px;
+    left:50%;
+    transform:translateX(-50%);
+    width:95%;
+    max-width:1280px;
+    z-index:1000;
+    backdrop-filter:blur(18px);
+    background:rgba(12,15,31,0.5);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:14px 24px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-family:'Syne',sans-serif;
+    font-size:1.4rem;
+    font-weight:800;
+    letter-spacing:2px;
+}
+
+.logo span{
+    color:var(--pink);
+}
+
+.nav-links{
+    display:flex;
+    gap:22px;
+    flex-wrap:wrap;
+}
+
+.nav-links a{
+    color:var(--muted);
+    text-decoration:none;
+    position:relative;
+    font-size:0.95rem;
+    transition:0.3s;
+}
+
+.nav-links a:hover{
+    color:white;
+}
+
+.nav-links a::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-6px;
+    width:0;
+    height:2px;
+    background:linear-gradient(90deg,var(--cyan),var(--pink));
+    transition:0.35s;
+}
+
+.nav-links a:hover::after{
+    width:100%;
+}
+
+/* Layout */
+
+section{
+    width:95%;
+    max-width:1280px;
+    margin:auto;
+    padding:90px 0 20px;
+}
+
+.section-title{
+    font-family:'Syne',sans-serif;
+    font-size:2rem;
+    margin-bottom:20px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.section-title::before{
+    content:"";
+    width:16px;
+    height:16px;
+    border-radius:50%;
+    background:linear-gradient(var(--cyan),var(--pink));
+    box-shadow:0 0 15px var(--cyan);
+}
+
+/* Hero */
+
+.hero{
+    min-height:100vh;
+    display:grid;
+    grid-template-columns:1.2fr 0.8fr;
+    align-items:center;
+    gap:40px;
+}
+
+.hero-text h3{
+    color:var(--cyan);
+    margin-bottom:10px;
+    letter-spacing:1px;
+}
+
+.hero-text h1{
+    font-family:'Syne',sans-serif;
+    font-size:5rem;
+    line-height:1;
+    margin-bottom:20px;
+    position:relative;
+}
+
+.hero-text h1 span{
+    background:linear-gradient(90deg,var(--pink),var(--cyan),white,var(--amber));
+    background-size:300%;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation:shine 6s linear infinite;
+}
+
+@keyframes shine{
+    from{background-position:0%;}
+    to{background-position:300%;}
+}
+
+.hero-text p{
+    color:var(--muted);
+    line-height:1.8;
+    max-width:700px;
+}
+
+.cta{
+    display:flex;
+    gap:16px;
+    margin-top:30px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    padding:14px 22px;
+    border-radius:14px;
+    text-decoration:none;
+    color:white;
+    font-weight:600;
+    border:1px solid transparent;
+    transition:0.35s;
+}
+
+.btn-primary{
+    background:linear-gradient(135deg,var(--indigo),var(--pink));
+    box-shadow:0 0 25px rgba(124,92,255,0.4);
+}
+
+.btn-secondary{
+    border:1px solid rgba(255,255,255,0.1);
+    background:rgba(255,255,255,0.04);
+}
+
+.btn:hover{
+    transform:translateY(-4px);
+}
+
+/* Floating Card */
+
+.float-card{
+    background:linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02));
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:28px;
+    padding:28px;
+    backdrop-filter:blur(20px);
+    box-shadow:var(--shadow);
+    transform-style:preserve-3d;
+    animation:float 5s ease-in-out infinite;
+}
+
+@keyframes float{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-12px);}
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+    margin-top:20px;
+}
+
+.stat{
+    background:rgba(255,255,255,0.04);
+    padding:18px;
+    border-radius:18px;
+    border:1px solid rgba(255,255,255,0.06);
+}
+
+.stat h2{
+    font-size:2rem;
+    color:var(--cyan);
+    margin-bottom:4px;
+}
+
+.stat p{
+    color:var(--muted);
+    font-size:0.9rem;
+}
+
+/* Cards */
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:18px;
+}
+
+.card{
+    background:var(--card);
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:24px;
+    padding:24px;
+    position:relative;
+    overflow:hidden;
+    transition:0.35s;
+}
+
+.card::before{
+    content:"";
+    position:absolute;
+    width:180px;
+    height:180px;
+    background:radial-gradient(var(--pink),transparent 70%);
+    top:-80px;
+    right:-80px;
+    opacity:0.15;
+}
+
+.card:hover{
+    transform:translateY(-6px);
+    border-color:rgba(255,255,255,0.15);
+}
+
+.card h3{
+    font-family:'Syne',sans-serif;
+    margin-bottom:10px;
+}
+
+.card p, .card li{
+    color:var(--muted);
+    line-height:1.7;
+    font-size:0.96rem;
+}
+
+.card ul{
+    padding-left:18px;
+}
+
+.timeline{
+    border-left:2px solid rgba(255,255,255,0.1);
+    margin-left:10px;
+    padding-left:24px;
+}
+
+.timeline-item{
+    position:relative;
+    margin-bottom:24px;
+}
+
+.timeline-item::before{
+    content:"";
+    position:absolute;
+    width:14px;
+    height:14px;
+    border-radius:50%;
+    background:linear-gradient(var(--cyan),var(--pink));
+    left:-32px;
+    top:6px;
+}
+
+/* Skills */
+
+.skill-wrap{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+}
+
+.skill{
+    padding:10px 16px;
+    border-radius:999px;
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.08);
+    color:var(--text);
+    font-size:0.92rem;
+}
+
+/* Footer */
+
+footer{
+    text-align:center;
+    padding:50px 20px;
+    color:var(--muted);
+    border-top:1px solid rgba(255,255,255,0.08);
+    margin-top:60px;
+}
+
+/* Responsive */
+
+@media(max-width:980px){
+
+.hero{
+    grid-template-columns:1fr;
+    padding-top:100px;
+}
+
+.hero-text h1{
+    font-size:3.6rem;
+}
+
+nav{
+    padding:12px 18px;
+}
+
+.nav-links{
+    gap:14px;
+}
+
+}
+
+@media(max-width:650px){
+
+.hero-text h1{
+    font-size:2.8rem;
+}
+
+.section-title{
+    font-size:1.6rem;
+}
+
+.stats{
+    grid-template-columns:1fr;
+}
+
+.nav-links{
+    display:none;
+}
+
+}
+</style>
+</head>
+
+<body>
+
+<div class="loader">
+    <h1>KN</h1>
+    <div class="loadbar"><span></span></div>
+</div>
+
+<canvas id="particles"></canvas>
+
+<div class="cursor"></div>
+<div class="cursor-ring"></div>
+
+<nav>
+    <div class="logo">KRISHNA<span>.</span></div>
+
+    <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#education">Education</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#research">Research</a>
+        <a href="#leadership">Leadership</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+    </div>
+</nav>
+
+<section class="hero">
+
+    <div class="hero-text">
+        <h3>Masters Intern • Systems Engineer • Aerospace & Avionics</h3>
+
+        <h1><span>KRISHNA N</span></h1>
+
+        <p>
+            Masters Intern at Honeywell Aerospace working in Integrated Flightdeck Systems (IFS), exploring the universe of avionics architectures, flight displays, system validation, synthetic vision systems, UAV technologies, and intelligent aerospace solutions. Researcher, systems thinker, and builder of airborne ideas stitched together with engineering precision.
+        </p>
+
+        <div class="cta">
+            <a href="#contact" class="btn btn-primary">Connect</a>
+            <a href="#projects" class="btn btn-secondary">View Projects</a>
+        </div>
+    </div>
+
+    <div class="float-card">
+
+        <h2 style="font-family:Syne,sans-serif;">Aerospace Snapshot 🚀</h2>
+
+        <div class="stats">
+
+            <div class="stat">
+                <h2>9.25</h2>
+                <p>M.E. CGPA</p>
+            </div>
+
+            <div class="stat">
+                <h2>4+</h2>
+                <p>Research Publications</p>
+            </div>
+
+            <div class="stat">
+                <h2>200+</h2>
+                <p>Programs Organized</p>
+            </div>
+
+            <div class="stat">
+                <h2>350+</h2>
+                <p>Camp Participants Led</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section id="about">
+
+    <h2 class="section-title">Professional Summary</h2>
+
+    <div class="card">
+        <p>
+            Masters Intern – Systems Engineer at Honeywell Aerospace with specialization in Avionics and Aeronautical Engineering. Currently gaining practical exposure in Primary Flight Displays (PFD), Synthetic Vision Systems (SVS), avionics architectures, aircraft systems data handling, and system-level validation workflows.
+            <br><br>
+            Strong academic and research foundation in high-speed jet control, UAV systems, flight-critical systems, avionics synchronization frameworks, and intelligent aerospace technologies. Published multiple peer-reviewed journal papers and actively involved in interdisciplinary engineering research.
+            <br><br>
+            Recognized for leadership across large-scale technical and social initiatives through NSS, Rotaract, Tamilmandram, and aerospace events. Passionate about systems engineering, aerospace innovation, autonomous systems, and solving real-world engineering problems.
+        </p>
+    </div>
+
+</section>
+
+<section id="education">
+
+    <h2 class="section-title">Education</h2>
+
+    <div class="timeline">
+
+        <div class="timeline-item card">
+            <h3>Master of Engineering (M.E.) – Avionics</h3>
+            <p>Anna University – Madras Institute of Technology, Chennai</p>
+            <p>CGPA: 9.25</p>
+            <p>August 2024 – April 2026</p>
+        </div>
+
+        <div class="timeline-item card">
+            <h3>Bachelor of Engineering (B.E.) – Aeronautical Engineering</h3>
+            <p>Anna University – Madras Institute of Technology, Chennai</p>
+            <p>CGPA: 8.56</p>
+            <p>November 2020 – June 2024</p>
+        </div>
+
+        <div class="timeline-item card">
+            <h3>CBSE Schooling – Pon Vidyashram</h3>
+            <p>Class 12: 95.2%</p>
+            <p>Class 10: 88.2%</p>
+            <p>June 2006 – March 2020</p>
+        </div>
+
+    </div>
+
+</section>
+
+<section id="experience">
+
+    <h2 class="section-title">Professional Experience</h2>
+
+    <div class="grid">
+
+        <div class="card">
+            <h3>Honeywell Aerospace – Integrated Flightdeck Systems (IFS)</h3>
+            <p><strong>Masters Intern – Systems Engineer</strong></p>
+            <p>January 2026 – Present</p>
+
+            <ul>
+                <li>Exposure to Primary Flight Displays (PFD) and avionics visualization systems</li>
+                <li>Worked with aircraft systems data handling and avionics architectures</li>
+                <li>Understanding of system-level design and avionics standards</li>
+                <li>Familiar with AI, automation, and validation workflows</li>
+                <li>Research on flight-critical systems and risk management</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3>Airports Authority of India (CNS), Chennai</h3>
+            <p><strong>Student Intern</strong></p>
+            <p>January 2025</p>
+
+            <ul>
+                <li>Learned Communication, Navigation, and Surveillance systems</li>
+                <li>Observed Air Traffic Management operations</li>
+                <li>Studied aviation operational workflows and procedures</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3>SLN Hitech Laser, Bangalore</h3>
+            <p><strong>Student Intern</strong></p>
+            <p>July 2022 – August 2022</p>
+
+            <ul>
+                <li>Hands-on exposure to manufacturing processes</li>
+                <li>Worked around SOPs and certification workflows</li>
+                <li>Learned industrial quality control systems</li>
+            </ul>
+        </div>
+
+    </div>
+
+</section>
+
+<section id="projects">
+
+    <h2 class="section-title">Academic Projects</h2>
+
+    <div class="grid">
+
+        <div class="card">
+            <h3>Cross-Architecture Shared Memory Interface</h3>
+            <p>
+                Developed a synchronized validation framework across heterogeneous avionics display architectures for enhanced avionics integration and testing workflows.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Climate-Aware Flight Path Optimization</h3>
+            <p>
+                Designed a turbulence prediction and route optimization system using real-time weather and climate-aware turbulence forecasting techniques.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Elliptic Supersonic Jet Control</h3>
+            <p>
+                Experimental investigation of Mach 2 jet control using C-D injections to study mixing and spreading characteristics in high-speed flows.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Autonomous Solar UAV</h3>
+            <p>
+                Designed a surveillance quadcopter with automatic power switching between battery and solar systems for extended endurance operations.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>450-Seater Aircraft Design</h3>
+            <p>
+                Conceptual aircraft design with 11,000 km range including propulsion, aerodynamic, structural, and performance analysis.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+<section id="research">
+
+    <h2 class="section-title">Research & Publications</h2>
+
+    <div class="grid">
+
+        <div class="card">
+            <h3>Effect of Primary Nozzle Lip Thickness on Elliptic Subsonic Co-flow Jet Characteristics</h3>
+            <p>Aircraft Engineering and Aerospace Technology</p>
+            <p>March 16, 2026</p>
+            <p>DOI: 10.1108/aeat-09-2025-0313</p>
+        </div>
+
+        <div class="card">
+            <h3>Effect of Air Tab Orientation on Mixing and Spreading Characteristics</h3>
+            <p>Fluid Dynamics</p>
+            <p>August 2025</p>
+            <p>DOI: 10.1134/s0015462825600518</p>
+        </div>
+
+        <div class="card">
+            <h3>Elliptic Supersonic Jet Control Using C-D Injections</h3>
+            <p>Aircraft Engineering and Aerospace Technology</p>
+            <p>June 27, 2025</p>
+        </div>
+
+        <div class="card">
+            <h3>Computational Study of Elliptic Subsonic Jet Controlled by Air Tabs</h3>
+            <p>Aircraft Engineering and Aerospace Technology</p>
+            <p>December 17, 2024</p>
+        </div>
+
+        <div class="card">
+            <h3>Peer Reviewer – Physics of Fluids (Q1 Journal)</h3>
+            <p>
+                Contributed as a reviewer for high-impact fluid mechanics research publications.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+<section id="skills">
+
+    <h2 class="section-title">Technical Skills</h2>
+
+    <div class="card">
+
+        <div style="margin-bottom:18px;">
+            <h3>Engineering & Simulation</h3>
+            <div class="skill-wrap">
+                <div class="skill">ANSYS CFX</div>
+                <div class="skill">Tecplot 360</div>
+                <div class="skill">Fusion 360</div>
+                <div class="skill">AutoCAD</div>
+                <div class="skill">Technomatix</div>
+            </div>
+        </div>
+
+        <div style="margin-bottom:18px;">
+            <h3>Programming</h3>
+            <div class="skill-wrap">
+                <div class="skill">ADA</div>
+                <div class="skill">C</div>
+                <div class="skill">C++</div>
+                <div class="skill">Python</div>
+                <div class="skill">MATLAB</div>
+                <div class="skill">Arduino IDE</div>
+            </div>
+        </div>
+
+        <div style="margin-bottom:18px;">
+            <h3>Core Skills</h3>
+            <div class="skill-wrap">
+                <div class="skill">Systems Engineering</div>
+                <div class="skill">Problem Solving</div>
+                <div class="skill">Time Management</div>
+                <div class="skill">Emotional Intelligence</div>
+                <div class="skill">Teaching & Mentoring</div>
+            </div>
+        </div>
+
+        <div>
+            <h3>Domains of Interest</h3>
+            <div class="skill-wrap">
+                <div class="skill">Flight Management Systems</div>
+                <div class="skill">Navigation Systems</div>
+                <div class="skill">Avionics Architectures</div>
+                <div class="skill">Rocket Propulsion</div>
+                <div class="skill">UAV Systems</div>
+                <div class="skill">Autonomous Systems</div>
+                <div class="skill">High-Speed Aerodynamics</div>
+                <div class="skill">Business Technologies</div>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<section id="leadership">
+
+    <h2 class="section-title">Leadership & Activities</h2>
+
+    <div class="grid">
+
+        <div class="card">
+            <h3>NSS Student Leader</h3>
+            <ul>
+                <li>Organized 200+ programs</li>
+                <li>Participated in 100+ initiatives</li>
+                <li>Led camps with 350+ participants</li>
+                <li>Best NSS Volunteer Award recipient</li>
+                <li>Represented Tamil Nadu at NSS National Integration Camp, Haryana</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3>Technical & Organizational Roles</h3>
+            <ul>
+                <li>Overall Coordinator – Tamil Nadu Drone Technology Festival</li>
+                <li>Rotaract Club – PG Representative</li>
+                <li>MIT Tamilmandram – Joint Secretary</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3>Conferences & Workshops</h3>
+            <ul>
+                <li>Fluid Mechanics & Nanoelectronics Conference – MIT Bangalore</li>
+                <li>Sustainable Development Seminar – MIT Chennai</li>
+                <li>Southeast Asia Aerospace Workshop – Bandung, Indonesia</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3>Certifications & Training</h3>
+            <ul>
+                <li>Drone Design & Assembly</li>
+                <li>IoT using Arduino/Raspberry Pi</li>
+                <li>Advanced Aeronautics Internship</li>
+                <li>Industrial Design – NSIC</li>
+                <li>Flight Training Laboratory – IIT Kanpur</li>
+            </ul>
+        </div>
+
+    </div>
+
+</section>
+
+<section id="contact">
+
+    <h2 class="section-title">Contact</h2>
+
+    <div class="card">
+
+        <p><strong>Email:</strong> krishnasriragavendra@gmail.com</p>
+        <p><strong>Phone:</strong> +91 88257 53552</p>
+        <p><strong>Location:</strong> Chennai, Tamil Nadu</p>
+        <p><strong>LinkedIn:</strong> krishna-n-56135921b</p>
+
+        <br>
+
+        <p>
+            Built at the intersection of avionics, systems thinking, and aerospace curiosity. Somewhere between turbulence maps, flight displays, supersonic jets, and late-night engineering diagrams lives this portfolio. ✨
+        </p>
+
+    </div>
+
+</section>
+
+<footer>
+    © 2026 Krishna N • Aerospace & Avionics Portfolio
+</footer>
+
+<script>
+
+/* Loading */
+
+window.addEventListener("load",()=>{
+
+    setTimeout(()=>{
+        document.querySelector(".loader").classList.add("hide");
+    },2000);
+
+});
+
+/* Cursor */
+
+const cursor = document.querySelector(".cursor");
+const ring = document.querySelector(".cursor-ring");
+
+window.addEventListener("mousemove",(e)=>{
+
+    cursor.style.left = e.clientX + "px";
+    cursor.style.top = e.clientY + "px";
+
+    ring.style.left = e.clientX + "px";
+    ring.style.top = e.clientY + "px";
+
+});
+
+/* Particles */
+
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+
+let particles = [];
+
+function resize(){
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+
+window.addEventListener("resize",resize);
+resize();
+
+class Particle{
+
+    constructor(){
+        this.x = Math.random()*canvas.width;
+        this.y = Math.random()*canvas.height;
+        this.vx = (Math.random()-0.5)*0.5;
+        this.vy = (Math.random()-0.5)*0.5;
+        this.size = Math.random()*2+1;
+    }
+
+    update(){
+        this.x += this.vx;
+        this.y += this.vy;
+
+        if(this.x < 0 || this.x > canvas.width) this.vx *= -1;
+        if(this.y < 0 || this.y > canvas.height) this.vy *= -1;
+    }
+
+    draw(){
+        ctx.beginPath();
+        ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
+        ctx.fillStyle = "rgba(120,220,255,0.7)";
+        ctx.fill();
+    }
+
+}
+
+for(let i=0;i<90;i++){
+    particles.push(new Particle());
+}
+
+function animate(){
+
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+
+    particles.forEach((p,i)=>{
+
+        p.update();
+        p.draw();
+
+        for(let j=i+1;j<particles.length;j++){
+
+            const dx = p.x - particles[j].x;
+            const dy = p.y - particles[j].y;
+
+            const dist = Math.sqrt(dx*dx + dy*dy);
+
+            if(dist < 120){
+
+                ctx.beginPath();
+                ctx.moveTo(p.x,p.y);
+                ctx.lineTo(particles[j].x,particles[j].y);
+
+                ctx.strokeStyle = "rgba(255,255,255,0.06)";
+                ctx.stroke();
+
+            }
+
+        }
+
+    });
+
+    requestAnimationFrame(animate);
+
+}
+
+animate();
+
+</script>
+
+</body>
+</html>
